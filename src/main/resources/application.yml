@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: phone_contact_manager
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  thymeleaf:
+    cache: false

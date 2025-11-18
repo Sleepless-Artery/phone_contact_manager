@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<body class="container mt-4">
+
+<h1 class="mb-4">Contacts</h1>
+
+<a class="btn btn-primary mb-3" href="/contacts/new">Create Contact</a>
+<a class="btn btn-danger mb-3" href="/contacts/delete-all">Delete All</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Note</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="c : ${contacts}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.phoneNumber}"></td>
+        <td th:text="${c.note}"></td>
+        <td>
+            <a class="btn btn-info btn-sm" th:href="@{/contacts/view/{id}(id=${c.id})}">View</a>
+            <a class="btn btn-warning btn-sm" th:href="@{/contacts/edit/{id}(id=${c.id})}">Edit</a>
+            <a class="btn btn-danger btn-sm"
+               th:href="@{/contacts/delete/{id}(id=${c.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${contact.id != null} ? 'Edit Contact' : 'Create Contact'">Contact Form</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<body class="container mt-4">
+
+<h1 th:text="${contact.id != null} ? 'Edit Contact' : 'Create Contact'">Contact Form</h1>
+
+<form th:action="@{${contact.id != null} ? '/contacts/' + ${contact.id} : '/contacts'}"
+      th:object="${contact}" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Name:</label>
+        <input class="form-control" type="text" th:field="*{name}" placeholder="Enter contact name">
+        <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone Number:</label>
+        <input class="form-control"
+               type="text"
+               th:field="*{phoneNumber}"
+               id="phoneNumber"
+               placeholder="+7 ___ ___ __ __"
+               maxlength="16">
+        <div class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Note:</label>
+        <textarea class="form-control" th:field="*{note}" placeholder="Enter note"></textarea>
+        <div class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <a class="btn btn-secondary" href="/contacts/ui">Back</a>
+
+</form>
+
+<script>
+    const phoneInput = document.getElementById('phoneNumber');
+
+    // вставляем +7 если пусто
+    phoneInput.addEventListener('focus', function() {
+        if (!this.value) this.value = '+7 ';
+    });
+
+    // форматирование
+    phoneInput.addEventListener('input', function() {
+        // удаляем все, кроме цифр
+        let digits = this.value.replace(/\D/g, '');
+
+        // добавляем обязательную 7
+        if (!digits.startsWith('7')) digits = '7' + digits;
+
+        // оставляем максимум 11 цифр
+        digits = digits.slice(0, 11);
+
+        // формируем формат: +7 XXX XXX XX XX
+        let formatted = '+7 ';
+
+        if (digits.length > 1) formatted += digits.slice(1, 4);       // XXX
+        if (digits.length >= 4) formatted += ' ' + digits.slice(4, 7); // XXX
+        if (digits.length >= 7) formatted += ' ' + digits.slice(7, 9); // XX
+        if (digits.length >= 9) formatted += ' ' + digits.slice(9, 11); // XX
+
+        this.value = formatted;
+    });
+
+    // не даём удалить +7
+    phoneInput.addEventListener('keydown', function(e) {
+        if ((this.selectionStart <= 3) && (e.key === 'Backspace' || e.key === 'Delete')) {
+            e.preventDefault();
+        }
+    });
+
+    // очищаем если ничего кроме +7
+    phoneInput.addEventListener('blur', function() {
+        if (this.value === '+7 ') this.value = '';
+    });
+</script>
+
+</body>
+</html>
