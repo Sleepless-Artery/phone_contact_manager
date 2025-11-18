@@ -12,8 +12,6 @@ FROM eclipse-temurin:21-jre-jammy as runtime
 WORKDIR /app
 
 COPY --from=builder /app/target/phone_contact_manager-*.jar app.jar
-COPY src/main/resources/db/migration/ /app/resources/db/migration/
-COPY src/main/resources/templates /app/resources/templates/
 
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError"
 
