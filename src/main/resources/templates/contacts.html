@@ -16,7 +16,6 @@
 <table class="table table-bordered table-striped">
     <thead>
     <tr>
-        <th>#</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Note</th>
@@ -26,7 +25,6 @@
 
     <tbody>
     <tr th:each="c : ${contacts}">
-        <td th:text="${c.id}"></td>
         <td th:text="${c.name}"></td>
         <td th:text="${c.phoneNumber}"></td>
         <td th:text="${c.note}"></td>
