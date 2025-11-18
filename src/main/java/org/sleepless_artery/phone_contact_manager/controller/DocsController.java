@@ -9,7 +9,7 @@ public class DocsController {
 
     @GetMapping("/docs")
     public String docs() {
-        return "docs";
+        return "/swagger-ui/index.html";
     }
 }
 
