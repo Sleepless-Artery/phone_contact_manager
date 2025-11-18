@@ -31,7 +31,9 @@
 		<flyway.version>11.8.2</flyway.version>
 		<lombok.version>1.18.36</lombok.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
+		<logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
 		<spring-dotenv.version>4.0.0</spring-dotenv.version>
+		<springdoc-openapi-starter.version>2.8.6</springdoc-openapi-starter.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -81,7 +83,13 @@
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
-			<version>9.0</version>
+			<version>${logstash-logback-encoder.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter.version}</version>
 		</dependency>
 	</dependencies>
 

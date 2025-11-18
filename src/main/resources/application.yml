@@ -25,3 +25,13 @@ spring:
 
   thymeleaf:
     cache: false
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+    tryItOutEnabled: true
+    filter: true
+  api-docs:
+    path: /api-docs
+
